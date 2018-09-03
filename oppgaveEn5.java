@@ -11,7 +11,7 @@ public class oppgaveEn5 {
             a[n] = a[indeks];
             a[indeks]  = flytt;
             indeks++;
-
+    //hjk
 
         }
 
