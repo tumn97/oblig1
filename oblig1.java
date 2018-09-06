@@ -157,10 +157,15 @@ public class oblig1 {
 
         String resultat = "";
         int n = s.length;
+        int index = 0;
 
-        int[] a = new int[s.length];
+        for (String g : s) {
+            index += g.length();
+        }
 
-        for (int i = 0;i < n; i++) {
+        int[] a = new int[n];
+
+        for (int i = 0;i < index; i++) {
             for(int j = 0;j < n; j++) {
                 if(a[j] < s[j].length()) {
                     resultat += s[j].toCharArray()[a[j]];
