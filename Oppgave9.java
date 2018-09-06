@@ -5,7 +5,7 @@ public class Oppgave9 {
         int n = a.length;
 
         if (n < 3) {
-            throw new IllegalArgumentException("a.length(" + n + ") < 3!");
+            throw new NoSuchElementException("a.length(" + n + ") < 3!");
         }
 
         int min1 = a[0];
@@ -36,8 +36,8 @@ public class Oppgave9 {
             }
         }
 
-        int SmallNumberIndex[] = {m1, m2, m3};
+        int index[] = {m1, m2, m3};
 
-        return SmallNumberIndex;
+        return index;
     }
 }
