@@ -2,6 +2,7 @@ package Algoritme.oblig;
 
 import Algoritme.Hjelpeklasse.Tabell;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
@@ -119,6 +120,35 @@ public class oblig1 {
         }
 
         return antallUlike;
+    }
+
+    /**
+     * Oppgave 3
+     * @param a
+     * @return
+     */
+
+    public static int antallUlikeUsortert(int[] a) {
+        // Hjelpevariabel som teller antall ulike heltall
+        int antallUlikeVerdier = 0;
+
+        ArrayList<Integer> UlikeVerdier = new ArrayList<>();
+
+        // Legger til alle heltall i arraylisten som ikke er lagt inn fra før av
+        for(int i = 0; i < a.length; i++) {
+            if(!UlikeVerdier.contains(a[i])) {
+                UlikeVerdier.add(a[i]);
+            }
+        }
+
+        // Størrelsen på arraylisten er lik antallet ulike heltall i tabellen
+        if(UlikeVerdier.size() == 1) {
+            antallUlikeVerdier = 0;
+        } else {
+            antallUlikeVerdier = UlikeVerdier.size();
+        }
+
+        return antallUlikeVerdier;
     }
 
 
