@@ -94,4 +94,81 @@ public class oblig1 {
 
         return antall;
     }
+
+}
+
+    /**
+     * Oppgave 2,
+     * @param a
+     * @return
+     */
+    public static int antallUlikeSortert(int[] a) {
+        int antallUlike = 1;
+
+        if (a.length == 0) {
+            return 0;
+        }
+
+        for (int i = 0; i < a.length - 1; i++) {
+            if (a[i] > a[i + 1]) {
+                throw new IllegalStateException("Arrayet er ikke sortert i stigende rekkefølge");
+            }
+            else if (a[i] != a[i + 1]){
+                ++antallUlike;
+            }
+        }
+
+        return antallUlike;
+    }
+
+
+    /**
+     * Oppgave 7a
+     * @param s første string
+     * @param t andre string
+     * @return stringen
+     */
+    public static String flett(String s, String t) {
+        String resultat = "";
+        int index;
+
+        if (s.length() >= t.length()) {
+            index = t.length();
+        } else  {
+            index = s.length();
+        }
+
+        for(int i=0; i<index; i++){
+            resultat += s.substring(i, i+1) + t.substring(i, i+1);
+        }
+
+        if(s.length() < t.length()) resultat += t.substring(s.length());
+        if(s.length() > t.length()) resultat += s.substring(t.length());
+
+        return resultat;
+    }
+
+    /**
+     * Oppgave 7b
+     * @param s Valgt string array
+     * @return
+     */
+    public static String flett(String... s) {
+
+        String resultat = "";
+        int n = s.length;
+
+        int[] a = new int[s.length];
+
+        for (int i = 0;i < n; i++) {
+            for(int j = 0;j < n; j++) {
+                if(a[j] < s[j].length()) {
+                    resultat += s[j].toCharArray()[a[j]];
+                    a[j]++;
+                }
+            }
+        }
+
+        return resultat;
+    }
 }
