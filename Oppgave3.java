@@ -13,7 +13,7 @@ public class Oppgave3 {
             }
         }
 
-        if(UlikeVerdier.size() == 1) { // Alle heltall som allerede er lagt til i arraylisten vil bli fjernet fra int[]
+        if(UlikeVerdier.size() == 1) { // Hvis størrelsen av arraylisten er lik 1 betyr det at tabellen ikke har noen forskjellige verdier
             antallUlikeVerdier = 0;
         } else {
             antallUlikeVerdier = UlikeVerdier.size(); // Størrelsen på arraylisten er antallet ulike heltall

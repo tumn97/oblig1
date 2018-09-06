@@ -2,6 +2,7 @@ package Algoritme.oblig;
 
 import Algoritme.Hjelpeklasse.Tabell;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
@@ -121,6 +122,35 @@ public class oblig1 {
         return antallUlike;
     }
 
+    /**
+     * Oppgave 3
+     * @param a
+     * @return
+     */
+
+    public static int antallUlikeUsortert(int[] a) {
+        // Hjelpevariabel som teller antall ulike heltall
+        int antallUlikeVerdier = 0;
+
+        ArrayList<Integer> UlikeVerdier = new ArrayList<>();
+
+        // Legger til alle heltall i arraylisten som ikke er lagt inn fra før av
+        for(int i = 0; i < a.length; i++) {
+            if(!UlikeVerdier.contains(a[i])) {
+                UlikeVerdier.add(a[i]);
+            }
+        }
+
+        // Størrelsen på arraylisten er lik antallet ulike heltall i tabellen
+        if(UlikeVerdier.size() == 1) {
+            antallUlikeVerdier = 0;
+        } else {
+            antallUlikeVerdier = UlikeVerdier.size();
+        }
+
+        return antallUlikeVerdier;
+    }
+
 
     /**
      * Oppgave 7a
@@ -157,10 +187,15 @@ public class oblig1 {
 
         String resultat = "";
         int n = s.length;
+        int index = 0;
 
-        int[] a = new int[s.length];
+        for (String g : s) {
+            index += g.length();
+        }
 
-        for (int i = 0;i < n; i++) {
+        int[] a = new int[n];
+
+        for (int i = 0;i < index; i++) {
             for(int j = 0;j < n; j++) {
                 if(a[j] < s[j].length()) {
                     resultat += s[j].toCharArray()[a[j]];
