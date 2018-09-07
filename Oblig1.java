@@ -6,12 +6,28 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
-public class Oblig1 {
+public class oblig1 {
+    public static void main(String[] args){
+        int[] test1= null;
 
-    /**
-    * Oppgave 1
-    * */
+        int[] a = Tabell.randPerm(27);              // en tilfeldig tabell
 
+          System.out.println("Det initielle arrayet: \n");
+            System.out.println(Arrays.toString(a));
+            maks(a);
+            System.out.println("Den største verdien: " + maks(a));
+            System.out.println("Det sorterte arrayet, etter størrelse: ");
+            System.out.println("\n"+Arrays.toString(a)); /* */
+/***/
+           // ombyttinger(test2);
+          // maks(test2);
+           // System.out.println("Det ble gjort : " + ombyttinger(a) +" ombyttinger");
+      // System.out.println("\n"+Arrays.toString(test2));
+
+    }
+    //**********************
+    //Oppgave 1*************
+    //**********************
     //1. Det skjer flest innbyttinger når den største verdien er helt fremme
     //2. Det blir færrest innbyttinger når den største og minste verdien er på deres
     // respekterende plasser. Størst, helt bak. Minst, helt foran.
@@ -19,72 +35,68 @@ public class Oblig1 {
     // n = 20, 17 bytt, med tilfeldige tall, 15, 15, 17, 15, 15.5 bytt i gjennomsnitt, når n = 20
     // n = 10, 9,7,5,9,7,8 gjennomsnitt for n = 10 = 9+7+5+9+7+8 =x => x/6 = 7.5 bytt i gjennomsnitt
     // n = 5, 3,2,4,3,2 gjennomsnitt : 2.8 bytt i gjennomsnitt når n = 5.
-    public static int maks(int[] a) {
+    public static int maks(int[] a){
 
-        if (a == null || a.length == 0)
-            throw new NoSuchElementException("Tabell er tom");
-        //itererer gjennom tabellen
+            if(a ==null)
+                throw new NoSuchElementException ("Tabell er tom");
+                //itererer gjennom tabellen
 
 
-        int m = 0;
-        int maksverdi = a[m];
+             int m = 0;
+             int maksverdi = a[m];
 
-        for (int i = 1; i < a.length; i++) {
-            //hvis a[i-1] er større enn a[i]
-            //så skifter de plass
-            /* */
-            if (a[i - 1] > a[i]) {
+            for( int i = 1; i <a.length; i++){
+                //hvis a[i-1] er større enn a[i]
+                //så skifter de plass
+              /* */ if(a[i-1]> a[i]){
 
-                int temp = a[i - 1];
-                a[i - 1] = a[i];
-                a[i] = temp;
+                    int temp = a[i-1];
+                    a[i-1]= a[i];
+                    a[i] = temp;
+
+                }
 
             }
-
-        }
-        //}
-        //skriver ut verdi, dermed er det -1. ellers outofBounds
-        return a[a.length - 1];
+    //}
+            //skriver ut verdi, dermed er det -1. ellers outofBounds
+            return a[a.length-1];
     }
 
-    public static int ombyttinger(int[] a) {
+    public static int ombyttinger(int[] a){
 
+        System.out.println("Det initielle arrayet:\n " + Arrays.toString(a));
 
-        if (a == null || a.length == 0)
-            throw new NoSuchElementException("Tabellen er tom, dermed ingen maks verdi");
-
+        if(a ==null)
+            throw new NoSuchElementException ("Tabell er tom");
         //itererer gjennom tabellen
 
         int antall = 0;
         int m = 0;
         int maksverdi = a[m];
 
-        for (int i = 1; i < a.length; i++) {
+        for( int i = 1; i <a.length; i++){
             //hvis a[i-1] er større enn a[i]
             //så skifter de plass
             //
             /* */
 
-            if (a[i - 1] > a[i]) {
-                int temp = a[i - 1];
-                a[i - 1] = a[i];
+            if(a[i-1]> a[i]){
+                int temp = a[i-1];
+                a[i-1]= a[i];
                 a[i] = temp;
                 antall++;
+                System.out.println("\n"+Arrays.toString(a) + " ombytting nr: " +i);
 
+            }else{
 
             }
-            //}
+        }
+        //}
 
-
-        } return antall;
-
+        return antall;
     }
 
-
-
-
-
-
+}
 
     /**
      * Oppgave 2,
@@ -109,96 +121,34 @@ public class Oblig1 {
 
         return antallUlike;
     }
+
     /**
      * Oppgave 3
-     * */
-    public static int antallUlikeUsortert(int[] a) {
-        // Hjelpevariabel som teller antall ulike heltall
-        int antallUlikeVerdier = 0;
-
-        ArrayList<Integer> UlikeVerdier = new ArrayList<>();
-
-        // Legger til alle heltall i arraylisten som ikke er lagt inn fra før av
-        for(int i = 0; i < a.length; i++) {
-            if(!UlikeVerdier.contains(a[i])) {
-                UlikeVerdier.add(a[i]);
-            }
-        }
-
-        // Størrelsen på arraylisten er lik antallet ulike heltall i tabellen
-        if(UlikeVerdier.size() == 1) {
-            antallUlikeVerdier = 0;
-        } else {
-            antallUlikeVerdier = UlikeVerdier.size();
-        }
-
-        return antallUlikeVerdier;
-    }
-
-
-    /***
-     * Oppgave 4
+     * @param a
+     * @return
      */
-    public static void delsortering(int[] a) {
 
-        int first = 0;
-        int last = a.length - 1;
+    public static int antallUlikeUsortert(int[] a) {
 
+        int teller = 0;                        // Hjelpevariabel som teller opp antall ulike heltall
 
-        for (int i = 1; i < a.length; ++i) {
-
-            if (/*a[i - 1] > a[i] && */maks(a) % 2 == 0) {
-
-               // if () {
-
-                    int temp1 = a[i];
-                    a[i] = a[last];
-                    a[last] = temp1;
-                   // last--;
-
-
-                } else if(maks(a) % 2 !=0) {
-                    int temp1 = a[i];
-                    a[i] = a[first];
-                    a[first] = temp1;
-                    first++;
-
+        for (int i = 0; i < a.length; i++) {   // Itererer igjennom hele int[] a
+            boolean erUlik = false;
+            for (int j = 0; j < i; j++) {      // Itererer gjennom a[i] og a[j] samtidig
+                if (a[i] == a[j]) {            // Hvis a[i] og a[j] har sammme verdi setter vi
+                    erUlik = true;             // den boolske variabelen erUlike på true og hopper ut av
+                    break;                     // nåværende iterasjon og fortsetter videre på neste iterasjon
                 }
             }
-        }
 
-
-
-
-
-    /**
-     * Oppgave 5
-     *
-     *
-     *
-    * */
-
-    public static void rotasjon(char[] a){
-        int indeks = 0;
-        int n = a.length-1;
-        for(int i = 0; i < a.length-1; i++){
-
-            char flytt = a[n];
-            a[n] = a[indeks];
-            a[indeks]  = flytt;
-            indeks++;
-
+            if (!erUlik) {                     // For hver iterasjon erUlik er satt til false
+                teller++;                      // plusser vi med 1 i teller
+            }
 
         }
-
+        return teller;                         // Returnerer verdien til teller som er antall ulike heltall
 
     }
-
-
-    /**
-     * Oppgave 6
-     */
-
 
 
     /**
@@ -255,65 +205,4 @@ public class Oblig1 {
 
         return resultat;
     }
-
-    /***
-     * Oppgave 8
-     */
-
-
-
-
-    /**
-     * Oppgave 9
-     */
-    public static int[] tredjeMin(int[] a) {
-
-        int n = a.length;
-
-        if (n < 3) {
-            throw new IllegalArgumentException("a.length(" + n + ") < 3!");
-        }
-
-        int min1 = a[0];
-        int min2 = a[0];
-        int min3 = a[0];
-
-        int m1 = 0;
-        int m2 = 0;
-        int m3 = 0;
-
-        for (int i = 0; i < a.length; i++) {
-
-            if (min1 > a[i]) {
-
-                min2 = min1;
-                min1 = a[i];
-                m1 = i;
-
-            } else if (min2 > a[i]) {
-
-                min2 = a[i];
-                m2 = i;
-
-            } else if (min3 > a[i] && min2 < a[i]) {
-
-                min3 = a[i];
-                m3 = i;
-            }
-        }
-
-        int SmallNumberIndex[] = {m1, m2, m3};
-
-        return SmallNumberIndex;
-    }
-
-
-
-    /**
-     *
-     * Oppgave 10
-    * **/
-
-
-
 }
