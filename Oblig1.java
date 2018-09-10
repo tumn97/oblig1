@@ -235,4 +235,32 @@ public class oblig1 {
 
         return resultat;
     }
+
+    /**
+     * Oppgave 8
+     * @param a
+     * @return
+     */
+
+    public static int[] indekssortering(int[] a) {
+        int[] indeks = new int[a.length];
+        int[] temp = new int[a.length];
+
+        if (a.length == 0) return indeks;
+        for (int i = 0; i < a.length; i++) {
+            temp[i] = a[i];
+        }
+
+        Tabell.boblesortering(temp);
+
+
+        for (int i = 0; i < a.length; i++) {
+            for (int j = 0; j < a.length; j++) {
+                if (temp[i] == a[j]) {
+                    indeks[i] = j;
+                }
+            }
+        }
+        return indeks;
+    }
 }
