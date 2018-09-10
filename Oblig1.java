@@ -1,10 +1,13 @@
 package Algoritme.oblig;
 
 import Algoritme.Hjelpeklasse.Tabell;
+import hjelpeklasser.Tabell;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
+
+import static hjelpeklasser.Tabell.bytt;
 
 public class oblig1 {
     public static void main(String[] args){
@@ -150,6 +153,33 @@ public class oblig1 {
 
     }
 
+    /**
+     * Oppgave 4
+     */
+
+
+    public static void delsortering(int[] a) {
+        int lengde = a.length;
+        int v = 0, h = lengde - 1;
+
+        if (a.length == 0) return;
+
+        while (v <= h) {
+            if (((a[v] % 2) == 0) && !((a[h] % 2) == 0)) {
+                bytt(a, v++, h--);
+            } else if ((a[v] % 2) == 0) {
+                h--;
+            } else if (!((a[h] % 2) == 0)) {
+                v++;
+            } else if (!((a[v] % 2) == 0) && ((a[h] % 2) == 0)) {
+                v++;
+                h--;
+            }
+        }
+        Tabell.kvikksortering(a,0,v);
+        Tabell.kvikksortering(a,v,lengde);
+
+    }
 
     /**
      * Oppgave 7a
