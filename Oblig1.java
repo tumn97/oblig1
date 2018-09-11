@@ -182,6 +182,36 @@ public class Oblig1 {
     /**
      * oppgave 6
      */
+    
+    public static int gcd(int a, int b)
+    {
+        return b == 0 ? a : gcd(b, a % b);
+    }
+
+
+
+
+    public static void rotasjon(char[] a, int d1){
+        int n = a.length;  if (n < 2) return;
+        if ((d1 %= n) < 0){
+            d1 += n;
+        }
+
+        int s = gcd(n, d1);
+
+        for (int m = 0; m < s; m++)
+        {
+            char flytt = a[m];
+
+            for (int i = m - d1, l = m; i != m; i -= d1) {
+                if (i < 0) {
+                    i += n;
+                }
+                a[l] = a[i]; l = i;
+            }
+            a[m + d1] = flytt;
+        }
+    }
 
     /**
      * Oppgave 7a
@@ -234,6 +264,7 @@ public class Oblig1 {
                 }
             }
         }
+
 
         return resultat;
     }
