@@ -13,6 +13,10 @@ public class Oppgave10 {
         int i = 0;
         int j = 0;
 
+        if(b.length() == 0 && a.length() != 0) {
+            return false;
+        }
+
         while (i < a.length() && j < b.length()) {
             if (A[i] < B[j])
                 i++;
