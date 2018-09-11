@@ -1,33 +1,13 @@
 package Algoritme.oblig;
 
-import Algoritme.Hjelpeklasse.Tabell;
-import hjelpeklasser.Tabell;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
-import static hjelpeklasser.Tabell.bytt;
 
-public class oblig1 {
-    public static void main(String[] args){
-        int[] test1= null;
+public class Oblig1 {
 
-        int[] a = Tabell.randPerm(27);              // en tilfeldig tabell
-
-          System.out.println("Det initielle arrayet: \n");
-            System.out.println(Arrays.toString(a));
-            maks(a);
-            System.out.println("Den største verdien: " + maks(a));
-            System.out.println("Det sorterte arrayet, etter størrelse: ");
-            System.out.println("\n"+Arrays.toString(a)); /* */
-/***/
-           // ombyttinger(test2);
-          // maks(test2);
-           // System.out.println("Det ble gjort : " + ombyttinger(a) +" ombyttinger");
-      // System.out.println("\n"+Arrays.toString(test2));
-
-    }
     //**********************
     //Oppgave 1*************
     //**********************
@@ -38,9 +18,15 @@ public class oblig1 {
     // n = 20, 17 bytt, med tilfeldige tall, 15, 15, 17, 15, 15.5 bytt i gjennomsnitt, når n = 20
     // n = 10, 9,7,5,9,7,8 gjennomsnitt for n = 10 = 9+7+5+9+7+8 =x => x/6 = 7.5 bytt i gjennomsnitt
     // n = 5, 3,2,4,3,2 gjennomsnitt : 2.8 bytt i gjennomsnitt når n = 5.
+
+    /**
+     * Oppgave 1
+     * @param a paramteren for tabell
+     * @return returnerer en verdi
+     */
     public static int maks(int[] a){
 
-            if(a ==null)
+            if(a ==null || a.length==0)
                 throw new NoSuchElementException ("Tabell er tom");
                 //itererer gjennom tabellen
 
@@ -67,7 +53,6 @@ public class oblig1 {
 
     public static int ombyttinger(int[] a){
 
-        System.out.println("Det initielle arrayet:\n " + Arrays.toString(a));
 
         if(a ==null)
             throw new NoSuchElementException ("Tabell er tom");
@@ -88,7 +73,6 @@ public class oblig1 {
                 a[i-1]= a[i];
                 a[i] = temp;
                 antall++;
-                System.out.println("\n"+Arrays.toString(a) + " ombytting nr: " +i);
 
             }else{
 
@@ -99,7 +83,7 @@ public class oblig1 {
         return antall;
     }
 
-}
+
 
     /**
      * Oppgave 2,
@@ -176,10 +160,28 @@ public class oblig1 {
                 h--;
             }
         }
-        Tabell.kvikksortering(a,0,v);
-        Tabell.kvikksortering(a,v,lengde);
+        kvikksortering(a,0,v);
+        kvikksortering(a,v,lengde);
 
     }
+    /**
+     * oppgave 5
+     */
+    public static void rotasjon(char[] a){
+        int indeks = 0;
+        int n = a.length-1;
+        for(int i = 0; i < a.length-1; i++){
+            char flytt = a[n];
+            a[n] = a[indeks];
+            a[indeks]  = flytt;
+            indeks++;
+        }
+    }
+
+
+    /**
+     * oppgave 6
+     */
 
     /**
      * Oppgave 7a
@@ -251,7 +253,7 @@ public class oblig1 {
             temp[i] = a[i];
         }
 
-        Tabell.boblesortering(temp);
+        boblesortering(temp);
 
 
         for (int i = 0; i < a.length; i++) {
@@ -262,5 +264,65 @@ public class oblig1 {
             }
         }
         return indeks;
+    }
+    private static void kvikksortering0(int[] a, int v, int h)  // en privat metode
+    {
+        if (v >= h) return;  // a[v:h] er tomt eller har maks ett element
+        int k = sParter0(a, v, h, (v + h)/2);  // bruker midtverdien
+        kvikksortering0(a, v, k - 1);     // sorterer intervallet a[v:k-1]
+        kvikksortering0(a, k + 1, h);     // sorterer intervallet a[k+1:h]
+    }
+
+
+    private static int sParter0(int[] a, int v, int h, int indeks)
+    {
+        bytt(a, indeks, h);           // skilleverdi a[indeks] flyttes bakerst
+        int pos = parter0(a, v, h - 1, a[h]);  // partisjonerer a[v:h − 1]
+        bytt(a, pos, h);              // bytter for å få skilleverdien på rett plass
+        return pos;                   // returnerer posisjonen til skilleverdien
+    }
+
+    private static int parter0(int[] a, int v, int h, int skilleverdi)
+    {
+        while (true)                                  // stopper når v > h
+        {
+            while (v <= h && a[v] < skilleverdi) v++;   // h er stoppverdi for v
+            while (v <= h && a[h] >= skilleverdi) h--;  // v er stoppverdi for h
+
+            if (v < h) bytt(a,v++,h--);                 // bytter om a[v] og a[h]
+            else  return v;  // a[v] er nåden første som ikke er mindre enn skilleverdi
+        }
+    }
+
+    public static void kvikksortering(int[] a, int fra, int til) // a[fra:til>
+    {
+        kvikksortering0(a, fra, til - 1);  // v = fra, h = til - 1
+    }
+
+    public static void kvikksortering(int[] a)   // sorterer hele tabellen
+    {
+        kvikksortering0(a, 0, a.length - 1);
+    }
+    public static void bytt(int[] a, int i, int j)
+    {
+        int temp = a[i];
+        a[i] = a[j];
+        a[j] = temp;
+    }
+
+    public static void bytt(char[] c, int i, int j) {
+        char temp = c[i];
+        c[i] = c[j];
+        c[j] = temp;
+    }
+    public static void boblesortering(int[] a)     // hører til klassen Tabell
+    {
+        for (int n = a.length; n > 1; n--)           // n reduseres med 1 hver gang
+        {
+            for (int i = 1; i < n; i++)                // går fra 1 til n
+            {
+                if (a[i - 1] > a[i]) bytt(a, i - 1, i);  // sammenligner/bytter
+            }
+        }
     }
 }
