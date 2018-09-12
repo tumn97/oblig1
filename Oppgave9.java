@@ -4,12 +4,11 @@ import Algoritme.oblig.Oblig1;
 
 import java.util.NoSuchElementException;
 
-
-    // Oppgave 9
+    // Oppgave 9 (unfinished)
     public static int[] tredjeMin(int[] a) {
 
         int n = a.length;
-        if(n < 3){
+        if (n < 3){
             throw new NoSuchElementException("a.length(" + n + ") < 3!");
         }
 
