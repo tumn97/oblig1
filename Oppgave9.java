@@ -4,77 +4,74 @@ import Algoritme.oblig.Oblig1;
 
 import java.util.NoSuchElementException;
 
-public class Oppgave9 {
-    public static int[] tredjeMin(int[] a){
-        //initialiserer n som tabellens lengde
-        Oblig1.indekssortering(a);
+
+    // Oppgave 9
+    public static int[] tredjeMin(int[] a) {
+
         int n = a.length;
         if(n < 3){
-            throw new NoSuchElementException("Tabellen inneholder mindre enn 3 verdier");
+            throw new NoSuchElementException("a.length(" + n + ") < 3!");
         }
 
-        //initialiserer posisjonene til minste, nest minste og tredje minste verdi
         int m1 = 0;
-        int m2= 1;
+        int m2 = 1;
         int m3 = 2;
+
         if(a.length == 3){
-            return new int[] {m1,m2,m3};
+            return new int[] {m1, m2, m3};
         }
 
-//            System.out.println(a[m1]);
-//            System.out.println(a[m2]);
-//            System.out.println(a[m3]);
-
-
-
-        //hvis den nest minste er større enn den minste. bytt
         if(a[1] < a[0]){
             m2 = 0;
             m1 = 1;
         }
-        //hvis den tredj minste er mindre enn a[0] bytt
+
         if(a[2] < a[0]){
             m3 = 0;
             m1 = 2;
         }
+
         if(a[1] < a[2]){
-            m1= 2;
-            m3= 1;
+            m1 = 2;
+            m3 = 1;
         }
-        //minste verdi
-        int minstverdi = a[m1];
-        int nestminst = a[m2];
-        int nestNestminst= a[m3];
 
-        for(int i = 3; i < n; i++){
+        int min1 = a[m1];
+        int min2 = a[m2];
+        int min3= a[m3];
 
-            if(a[i] < nestNestminst){
+        for (int i = 3; i < n; i++){
+
+            if (a[i] < min3){
 
                 m3 = i;
-                nestNestminst = a[i];
+                min3 = a[i];
 
-                if(a[i] <= nestminst){
+                if (a[i] <= min2){
 
                     m3= m2;
-                    nestNestminst = nestminst;
+                    min3 = min2;
 
                     m2 = i;
-                    nestminst = a[i];
-                    if(a[i] < minstverdi){
+                    min2 = a[i];
+
+                    if (a[i] < min1){
                         m2 = m1;
-                        nestminst = minstverdi;
+                        min2 = min1;
 
                         m1 = i;
-                        minstverdi = a[i];
+                        min1 = a[i];
 
                     }
-                }else{
+                } else {
+
                     m2 = i;
-                    nestminst=a[i];
+                    min2=a[i];
                 }
             }
 
         }
-        return new int[] {m1,m2,m3};
+
+        int indeks[] = {m1, m2, m3};
+        return indeks;
     }
-}
