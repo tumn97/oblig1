@@ -5,6 +5,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
+//  Gruppe - Asians
+//  s315611	- Earl John Torculas Laguardia
+//  s325862 - Tuan Minh Nguyen
+//  s325851	- Thevy Ngo
+//  s325861	- Daniel Nguyen
+
 
 public class Oblig1 {
 
@@ -26,29 +32,29 @@ public class Oblig1 {
      */
     public static int maks(int[] a){
 
-            if(a ==null || a.length==0)
-                throw new NoSuchElementException ("Tabell er tom");
-                //itererer gjennom tabellen
+        if(a ==null || a.length==0)
+            throw new NoSuchElementException ("Tabell er tom");
+        //itererer gjennom tabellen
 
 
-             int m = 0;
-             int maksverdi = a[m];
+        int m = 0;
+        int maksverdi = a[m];
 
-            for( int i = 1; i <a.length; i++){
-                //hvis a[i-1] er større enn a[i]
-                //så skifter de plass
-              /* */ if(a[i-1]> a[i]){
+        for( int i = 1; i <a.length; i++){
+            //hvis a[i-1] er større enn a[i]
+            //så skifter de plass
+            /* */ if(a[i-1]> a[i]){
 
-                    int temp = a[i-1];
-                    a[i-1]= a[i];
-                    a[i] = temp;
-
-                }
+                int temp = a[i-1];
+                a[i-1]= a[i];
+                a[i] = temp;
 
             }
-    //}
-            //skriver ut verdi, dermed er det -1. ellers outofBounds
-            return a[a.length-1];
+
+        }
+        //}
+        //skriver ut verdi, dermed er det -1. ellers outofBounds
+        return a[a.length-1];
     }
 
     public static int ombyttinger(int[] a){
@@ -182,7 +188,7 @@ public class Oblig1 {
     /**
      * oppgave 6
      */
-    
+
     public static int gcd(int a, int b)
     {
         return b == 0 ? a : gcd(b, a % b);
@@ -355,5 +361,86 @@ public class Oblig1 {
                 if (a[i - 1] > a[i]) bytt(a, i - 1, i);  // sammenligner/bytter
             }
         }
+    }
+
+
+    /**
+     * Oppgave 10
+     */
+    public static boolean inneholdt(String a, String b) {
+
+        char[] A = a.toCharArray();
+        char[] B = b.toCharArray();
+
+        quickSort(A, 0, A.length - 1);
+        quickSort(B, 0, B.length - 1);
+
+        return inklusjon(A, B);
+    }
+
+
+    public static boolean inklusjon(char[] a, char[] b, int c, int d) {
+
+        int i = 0;                                       // indekser
+        int j = 0;
+
+        while (i < c && j < d) {                         // Itererer gjennom begge arrayene.
+            if (a[i] > b[j])                             // Hvis a[i] > b[j] hopper vi til neste element i tabell b
+                j++;
+            else if (a[i] == b[j]) {                     // Hvis a[i] == b[j] hopper vi til neste element i
+                i++;                                     // begge tabellene
+                j++;
+            } else if (a[i] < b[j]) {                    // Hvis a[i] < b[j], returner false
+                return false;
+            }
+        }
+
+        if(i < c) {                                      // Hvis indeksen til tabell a mindre enn lengden på tabell a,
+            return false;                                // returner false
+        } else
+            return true;                                 // ellers, return true
+
+    }
+
+    public static boolean inklusjon(char[] a, char[] b) {
+
+        return inklusjon(a, b, a.length, b.length);
+    }
+
+    public static void quickSort(char[] tab, int low, int high) {
+
+        if (tab == null || tab.length == 0)        // Hopp ut av metoden hvis tabellen ikke
+            return;                                // eksisterer eller hvis lengden til tabellen er lik 0.
+
+        if (low >= high)                           // Hopp ut av metoden hvis det minste elementet er mindre
+            return;                                // eller lik det største elementet
+
+        int middle = low + (high - low) / 2;       // Velger midterste indeks som "pivot"
+        int pivot = tab[middle];
+
+        int i = low, j = high;
+        while (i <= j) {
+            while (tab[i] < pivot) {               // Elementer som er mindre enn pivot plasseres på venstre side av pivot
+                i++;
+            }
+
+            while (tab[j] > pivot) {               // Elementer som er større enn pivot plasseres på høyre side av pivot
+                j--;
+            }
+
+            if (i <= j) {                          // Partisjonerer. Hvis elementen er lavere eller lik pivot
+                char temp = tab[i];                // blir den plass med det elementet som ligger lengst til venstre
+                tab[i] = tab[j];                   // som er større enn pivot
+                tab[j] = temp;
+                i++;
+                j--;
+            }
+        }
+
+        if (low < j)                               // Sorterer sub delene rekursivt
+            quickSort(tab, low, j);
+
+        if (high > i)
+            quickSort(tab, i, high);
     }
 }
