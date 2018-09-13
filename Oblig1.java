@@ -1,6 +1,5 @@
 package Algoritme.oblig;
 
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
@@ -366,7 +365,7 @@ public class Oblig1 {
     /**
      * Oppgave 9
      */
-    
+
     public static int[] tredjeMin(int[] a) {
 
         int n = a.length;
@@ -378,7 +377,6 @@ public class Oblig1 {
             int[] indeks1 = new int[3];
             int[] temp1 = new int[n];
 
-            //if (a.length == 0)return indeks;
             for (int i = 0; i < n; i++) {
                 temp1[i] = a[i];
             }
@@ -399,7 +397,6 @@ public class Oblig1 {
             int[] indeks2 = new int[6];
             int[] temp2 = new int[6];
 
-            //if (a.length == 0)return indeks;
             for (int i = 0; i < 6; i++) {
                 temp2[i] = a[i];
             }
@@ -420,7 +417,6 @@ public class Oblig1 {
             int[] indeks3 = new int[10];
             int[] temp3 = new int[10];
 
-            //if (a.length == 0)return indeks;
             for (int i = 0; i < 10; i++) {
                 temp3[i] = a[i];
             }
